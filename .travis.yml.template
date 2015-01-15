@@ -18,8 +18,6 @@ after_success: coveralls
 deploy:
   provider: pypi
   user: {{ github_user }}
-  password:
-    secure: {{ encrypted_pypi_password }}
   distributions: sdist bdist_wheel
   on:
     python: 2.7
