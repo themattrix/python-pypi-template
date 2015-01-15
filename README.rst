@@ -1,0 +1,45 @@
+{{ package_name|capitalize }} |Version| |Build| |Coverage| |Health|
+===================================================================
+
+|Compatibility| |Implementations| |Format| |Downloads|
+
+{{ short_description }}
+
+.. code:: python
+
+    # TODO: add super short usage
+
+
+Installation:
+
+.. code:: shell
+
+    $ pip install {{ package_name }}
+
+.. TODO: longer description
+
+
+Example
+-------
+
+.. code:: python
+
+    # TODO: add example
+
+
+.. |Build| image:: https://travis-ci.org/{{ github_user }}/{{ repo_name }}.svg?branch=master
+   :target: https://travis-ci.org/{{ github_user }}/{{ repo_name }}
+.. |Coverage| image:: https://img.shields.io/coveralls/{{ github_user }}/{{ repo_name }}.svg
+   :target: https://coveralls.io/r/{{ github_user }}/{{ repo_name }}
+.. |Health| image:: https://landscape.io/github/{{ github_user }}/{{ repo_name }}/master/landscape.svg
+   :target: https://landscape.io/github/{{ github_user }}/{{ repo_name }}/master
+.. |Version| image:: https://pypip.in/version/{{ package_name }}/badge.svg?text=version
+    :target: https://pypi.python.org/pypi/{{ package_name }}
+.. |Downloads| image:: https://pypip.in/download/{{ package_name }}/badge.svg
+    :target: https://pypi.python.org/pypi/{{ package_name }}
+.. |Compatibility| image:: https://pypip.in/py_versions/{{ package_name }}/badge.svg
+    :target: https://pypi.python.org/pypi/{{ package_name }}
+.. |Implementations| image:: https://pypip.in/implementation/{{ package_name }}/badge.svg
+    :target: https://pypi.python.org/pypi/{{ package_name }}
+.. |Format| image:: https://pypip.in/format/{{ package_name }}/badge.svg
+    :target: https://pypi.python.org/pypi/{{ package_name }}

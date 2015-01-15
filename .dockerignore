@@ -1,0 +1,7 @@
+.git
+.gitignore
+.landscape.yml
+.ropeproject
+.travis.yml
+fig.yml
+*.swp
