@@ -225,7 +225,7 @@ def main():
         populate_directories(template_values)
 
         # No longer need the template setup files!
-        git('rm', populate_ini)
+        git('rm', '-f', populate_ini)
         git('rm', abspath(__file__))
 
     except RuntimeError as e:
