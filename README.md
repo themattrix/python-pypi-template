@@ -2,8 +2,6 @@
 
 Template for quickly creating a new Python project and publishing it to [PyPI](https://pypi.python.org/pypi).
 
-> ***NOTE: Not yet operational! Stay tuned!***
-
 
 ## Requirements
 
