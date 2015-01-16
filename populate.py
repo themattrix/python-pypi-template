@@ -215,9 +215,13 @@ def populate_directories(template_values):
 
 
 def main():
-    template_values = get_template_values()
-    populate_files(template_values)
-    populate_directories(template_values)
+    try:
+        template_values = get_template_values()
+        populate_files(template_values)
+        populate_directories(template_values)
+    except RuntimeError as e:
+        print('[ERROR] {e}'.format(e=e))
+        sys.exit(1)
 
 
 if __name__ == '__main__':
