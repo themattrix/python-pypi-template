@@ -228,6 +228,9 @@ def main():
         git('rm', '-f', populate_ini)
         git('rm', abspath(__file__))
 
+        # Stage the rest of the updated files.
+        git('add', '-u')
+
     except RuntimeError as e:
         print('[ERROR] {e}'.format(e=e))
         sys.exit(1)
