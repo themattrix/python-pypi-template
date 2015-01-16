@@ -201,7 +201,8 @@ def populate_files(template_values):
         with open(template_path, 'wb') as f:
             f.write(content)
 
-        git('mv', template_path, re.sub('[.]template$', '', template_path))
+        populated_path = re.sub('[.]template$', '', template_path)
+        git('mv', '-f', template_path, populated_path)
 
 
 def populate_directories(template_values):
