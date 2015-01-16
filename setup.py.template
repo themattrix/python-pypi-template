@@ -8,14 +8,12 @@ setup(
     license='MIT',
     author='{{ author_name }}',
     author_email='{{ author_email }}',
-    install_requires=[
-        {{ install_requires }}
-    ],
-    tests_require=[
-        {{ tests_require }}
-    ],
+    install_requires=(
+        {{ install_requires|pytuple }}),
+    tests_require=(
+        {{ tests_require|pytuple }}),
     description=(
-        {{ short_description }}),
+        {{ short_description|pystring }}),
     classifiers=(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2',
