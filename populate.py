@@ -122,12 +122,18 @@ def get_template_values():
 
     values.update(get_populate_ini_settings())
 
+    print('Using the following template values:\n    {values}'.format(
+        values='\n    '.join(
+            '{k}: {v!r}'.format(k=k, v=v)
+            for k, v in items(values))))
+
     return values
 
 
 def replace_multiline(text, key, value, filter_name, replacement_fn):
-    token = re.escape('{{{{ {k}|{f} }}}}'.format(k=key, f=filter_name))
-    regex = re.compile('(?P<indent>[ \t]*){token}'.format(token=token))
+    token = '{{{{ {k}|{f} }}}}'.format(k=key, f=filter_name)
+    regex = re.compile('(?P<indent>[ \t]*){token}'.format(
+        token=re.escape(token)))
 
     while True:
         match = regex.search(text)
@@ -199,10 +205,13 @@ def populate_directories(template_values):
     for template_dir in find_templated_directories():
 
         for k, v in items(template_values):
+            if not isinstance(v, basestring):
+                continue
+
             renamed_dir = template_dir.replace('{{{{ {k} }}}}'.format(k=k), v)
 
             if renamed_dir != template_dir:
-                os.rename(template_dir, renamed_dir)
+                git('mv', template_dir, renamed_dir)
 
 
 def main():
