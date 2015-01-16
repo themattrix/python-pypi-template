@@ -21,6 +21,7 @@ except ImportError:
 
 
 this_dir = dirname(abspath(__file__))
+populate_ini = join(this_dir, 'populate.ini')
 
 
 if sys.version_info < (3, 0):
@@ -92,7 +93,7 @@ def get_tests_require():
 
 def get_populate_ini_settings():
     config = ConfigParser()
-    config.readfp(open(join(this_dir, 'populate.ini')))
+    config.readfp(open(populate_ini))
     values = dict(
         package_name=config.get('global', 'package_name'),
         package_version=config.get('global', 'package_version'),
@@ -200,6 +201,8 @@ def populate_files(template_values):
         with open(template_path, 'wb') as f:
             f.write(content)
 
+        git('mv', template_path, re.sub('[.]template$', '', template_path))
+
 
 def populate_directories(template_values):
     for template_dir in find_templated_directories():
@@ -219,6 +222,11 @@ def main():
         template_values = get_template_values()
         populate_files(template_values)
         populate_directories(template_values)
+
+        # No longer need the template setup files!
+        git('rm', populate_ini)
+        git('rm', abspath(__file__))
+
     except RuntimeError as e:
         print('[ERROR] {e}'.format(e=e))
         sys.exit(1)
