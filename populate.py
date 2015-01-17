@@ -227,6 +227,7 @@ def main():
         # No longer need the template setup files!
         git('rm', '-f', populate_ini)
         git('rm', abspath(__file__))
+        git('rm', join(this_dir, 'README.md'))
 
         # Stage the rest of the updated files.
         git('add', '-u')
