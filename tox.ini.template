@@ -10,7 +10,7 @@ nosetests = true
 [defaultcommands]
 flake8 = flake8 setup.py "{{ package_name }}"
 pyflakes = pyflakes setup.py "{{ package_name }}"
-nosetests = nosetests --with-coverage --cover-package="{{ package_name }}" "{{ package_name }}/test"
+nosetests = nosetests --with-coverage --cover-tests --cover-inclusive --cover-package="{{ package_name }}" "{{ package_name }}/test"
 
 [testenv]
 whitelist_externals = true
