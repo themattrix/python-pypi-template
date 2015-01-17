@@ -30,7 +30,7 @@ Template for quickly creating a new Python project and publishing it to [PyPI](h
 At this point, your library should be empty, but all set up. Let's test it out!
 
 
-## Tests
+## Local Tests
 
 We're using Docker, Fig, and [Tox](https://tox.readthedocs.org/en/latest/) to approximate the environment that Travis CI runs when you push. This will allow you to run your code against multiple versions of Python (2.6, 2.7, 3.2, 3.3, 3.4, PyPy, and PyPy3) locally before pushing it or even committing it.
 
@@ -39,3 +39,17 @@ $ fig build && fig up
 ```
 
 The command will take a while the first time you run it, but subsequent runs will be quick.
+
+
+## PyPI Deployment
+
+Travis CI will deploy a new version of your package to PyPI every time you push a tag of any name to any branch. My typical process for making changes is something like this:
+
+1. Made some code changes, and [update the version number](http://semver.org/) in `setup.py`.
+2. Test the changes locally (e.g., `fig build && fig up`). See previous section.
+3. Commit.
+4. Push your changes, and make sure Travis CI succeeds.
+5. Tag the successful commit with the newly-updated version (e.g., `git tag 1.0.2`).
+6. Push the tag (e.g., `git push origin 1.0.2`).
+
+Then sit back and wait for Travis CI to push your new package version to PyPI!
