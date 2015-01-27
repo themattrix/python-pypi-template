@@ -13,7 +13,7 @@ install:
 - pip install coveralls
 - python setup.py develop
 before_script: flake8 setup.py "{{ package_name }}"
-script: nosetests --with-coverage --cover-tests --cover-inclusive --cover-package="{{ package_name }}" "{{ package_name }}/test"
+script: nosetests --with-doctest --with-coverage --cover-tests --cover-inclusive --cover-package="{{ package_name }}" "{{ package_name }}"
 after_success: coveralls
 deploy:
   provider: pypi

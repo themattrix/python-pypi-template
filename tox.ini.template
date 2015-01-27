@@ -5,17 +5,28 @@ skipsdist = {env:TOXSKIPSDIST:false}
 [installonly]
 flake8 = true
 pyflakes = true
+pylint = true
 nosetests = true
 
 [defaultcommands]
 flake8 = flake8 setup.py "{{ package_name }}"
 pyflakes = pyflakes setup.py "{{ package_name }}"
-nosetests = nosetests --with-coverage --cover-tests --cover-inclusive --cover-package="{{ package_name }}" "{{ package_name }}/test"
+pylint = pylint --rcfile=.pylintrc "{{ package_name }}"
+nosetests = nosetests --with-coverage --cover-tests --cover-inclusive --cover-package="{{ package_name }}" "{{ package_name }}"
+
+[testenv:py34]
+whitelist_externals = true
+deps =
+    pylint
+    -rrequirements.txt
+commands =
+    {[{env:TOXCOMMANDS:defaultcommands}]flake8}
+    {[{env:TOXCOMMANDS:defaultcommands}]pyflakes}
+    {[{env:TOXCOMMANDS:defaultcommands}]pylint}
+    {[{env:TOXCOMMANDS:defaultcommands}]nosetests}
 
 [testenv]
 whitelist_externals = true
 deps = -rrequirements.txt
 commands =
-    {[{env:TOXCOMMANDS:defaultcommands}]flake8}
-    {[{env:TOXCOMMANDS:defaultcommands}]pyflakes}
     {[{env:TOXCOMMANDS:defaultcommands}]nosetests}
