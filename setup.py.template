@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name='{{ package_name }}',
     version='{{ package_version }}',
-    packages=('{{ package_name }}',),
+    packages=('{{ package_dir_name }}',),
     url='https://github.com/{{ github_user }}/{{ repo_name }}',
     license='MIT',
     author='{{ author_name }}',

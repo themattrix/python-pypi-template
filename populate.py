@@ -123,6 +123,10 @@ def get_template_values():
 
     values.update(get_populate_ini_settings())
 
+    # The actual package directory should not have dashes in it, but dashes are
+    # pretty common for package names.
+    values['package_dir_name'] = values['package_name'].replace('-', '_')
+
     print('Using the following template values:\n    {values}'.format(
         values='\n    '.join(
             '{k}: {v!r}'.format(k=k, v=v)

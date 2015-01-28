@@ -12,8 +12,8 @@ install:
 - pip install -r requirements.txt
 - pip install coveralls
 - python setup.py develop
-before_script: flake8 setup.py "{{ package_name }}"
-script: nosetests --with-doctest --with-coverage --cover-tests --cover-inclusive --cover-package="{{ package_name }}" "{{ package_name }}"
+before_script: flake8 setup.py "{{ package_dir_name }}"
+script: nosetests --with-doctest --doctest-options="+NORMALIZE_WHITESPACE" --with-coverage --cover-tests --cover-inclusive --cover-package="{{ package_dir_name }}" "{{ package_dir_name }}"
 after_success: coveralls
 deploy:
   provider: pypi

@@ -10,9 +10,9 @@ nosetests = true
 
 [defaultcommands]
 flake8 = flake8 setup.py "{{ package_name }}"
-pyflakes = pyflakes setup.py "{{ package_name }}"
-pylint = pylint --rcfile=.pylintrc "{{ package_name }}"
-nosetests = nosetests --with-doctest --with-coverage --cover-tests --cover-inclusive --cover-package="{{ package_name }}" "{{ package_name }}"
+pyflakes = pyflakes setup.py "{{ package_dir_name }}"
+pylint = pylint --rcfile=.pylintrc "{{ package_dir_name }}"
+nosetests = nosetests --with-doctest --doctest-options="+NORMALIZE_WHITESPACE" --with-coverage --cover-tests --cover-inclusive --cover-package="{{ package_dir_name }}" "{{ package_dir_name }}"
 
 [testenv:py34]
 whitelist_externals = true
