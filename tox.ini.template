@@ -12,7 +12,7 @@ nosetests = true
 flake8 = flake8 setup.py "{{ package_name }}"
 pyflakes = pyflakes setup.py "{{ package_name }}"
 pylint = pylint --rcfile=.pylintrc "{{ package_name }}"
-nosetests = nosetests --with-coverage --cover-tests --cover-inclusive --cover-package="{{ package_name }}" "{{ package_name }}"
+nosetests = nosetests --with-doctest --with-coverage --cover-tests --cover-inclusive --cover-package="{{ package_name }}" "{{ package_name }}"
 
 [testenv:py34]
 whitelist_externals = true
