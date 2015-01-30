@@ -31,9 +31,7 @@ RUN pip install tox
 
 RUN mkdir /app
 WORKDIR /app
-ADD requirements_test.txt /app/requirements_test.txt
-ADD requirements_install.txt /app/requirements_install.txt
-ADD requirements.txt /app/requirements.txt
+ADD requirements*.txt /app/
 ADD tox.ini /app/tox.ini
 RUN TOXSKIPSDIST=true TOXCOMMANDS=installonly tox
 

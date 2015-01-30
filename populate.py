@@ -33,13 +33,13 @@ else:
 
 
 def find_templated_files():
-    for root, dirnames, filenames in os.walk(this_dir):
+    for root, _, filenames in os.walk(this_dir):  # pylint: disable=W0612
         for f in fnmatch.filter(filenames, '*.template'):
             yield join(root, f)
 
 
 def find_templated_directories():
-    for root, dirnames, filenames in os.walk(this_dir):
+    for root, dirnames, _ in os.walk(this_dir):  # pylint: disable=W0612
         for d in fnmatch.filter(dirnames, '{{ * }}'):
             yield join(root, d)
 
@@ -54,8 +54,12 @@ def read_requirements(requirements_file_basename):
 
     for line in content.splitlines():
         line = re.sub('#.*', '', line).strip()
-        if line:
-            yield line
+        if not line:
+            continue
+        # Ignore included requirements files.
+        if line.startswith('-r'):
+            continue
+        yield line
 
 
 def get_author_email():
@@ -84,7 +88,7 @@ def get_github_info():
 
 
 def get_install_requires():
-    return tuple(read_requirements('requirements_install.txt'))
+    return tuple(read_requirements('requirements.txt'))
 
 
 def get_tests_require():

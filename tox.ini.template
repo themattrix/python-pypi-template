@@ -17,8 +17,9 @@ nosetests = nosetests --with-doctest --doctest-options="+NORMALIZE_WHITESPACE" -
 [testenv:py34]
 whitelist_externals = true
 deps =
-    pylint
-    -rrequirements.txt
+    -rrequirements_test_runner.txt
+    -rrequirements_static_analysis.txt
+    -rrequirements_test.txt
 commands =
     {[{env:TOXCOMMANDS:defaultcommands}]flake8}
     {[{env:TOXCOMMANDS:defaultcommands}]pyflakes}
@@ -27,6 +28,8 @@ commands =
 
 [testenv]
 whitelist_externals = true
-deps = -rrequirements.txt
+deps =
+    -rrequirements_test_runner.txt
+    -rrequirements_test.txt
 commands =
     {[{env:TOXCOMMANDS:defaultcommands}]nosetests}
