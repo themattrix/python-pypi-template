@@ -32,7 +32,7 @@ At this point, your library should be empty, but all set up. Let's test it out!
 
 ## Local Tests
 
-We're using Docker, Fig, and [Tox](https://tox.readthedocs.org/en/latest/) to approximate the environment that Travis CI runs when you push. This will allow you to run your code against multiple versions of Python (2.6, 2.7, 3.2, 3.3, 3.4, PyPy, and PyPy3) locally before pushing it or even committing it.
+Docker, Fig, and [Tox](https://tox.readthedocs.org/en/latest/) are used to approximate the environment that Travis CI runs when you push. This will allow you to run your code against multiple versions of Python (2.6, 2.7, 3.2, 3.3, 3.4, PyPy, and PyPy3) locally before pushing it or even committing it.
 
 ```
 $ fig build && fig up
