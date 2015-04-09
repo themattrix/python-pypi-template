@@ -3,5 +3,5 @@
 .landscape.yml
 .ropeproject
 .travis.yml
-fig.yml
+docker-compose.yml
 *.swp

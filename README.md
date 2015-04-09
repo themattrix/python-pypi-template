@@ -7,7 +7,7 @@ Template for quickly creating a new Python project and publishing it to [PyPI](h
 
 - [Python](https://www.python.org/)
 - [Travis CI command-line tools](https://rubygems.org/gems/travis)
-- [Docker](https://www.docker.com/) and [Fig](http://www.fig.sh/)
+- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
 - [Git](http://git-scm.com/) and a [GitHub](https://github.com/) account
 
 
@@ -32,10 +32,10 @@ At this point, your library should be empty, but all set up. Let's test it out!
 
 ## Local Tests
 
-Docker, Fig, and [Tox](https://tox.readthedocs.org/en/latest/) are used to approximate the environment that Travis CI runs when you push. This will allow you to run your code against multiple versions of Python (2.6, 2.7, 3.2, 3.3, 3.4, PyPy, and PyPy3) locally before pushing it or even committing it.
+Docker, Compose, and [Tox](https://tox.readthedocs.org/en/latest/) are used to approximate the environment that Travis CI runs when you push. This will allow you to run your code against multiple versions of Python (2.6, 2.7, 3.2, 3.3, 3.4, PyPy, and PyPy3) locally before pushing it or even committing it.
 
 ```
-$ fig build && fig up
+$ docker-compose build && docker-compose up
 ```
 
 The command will take a while the first time you run it, but subsequent runs will be quick.
@@ -46,7 +46,7 @@ The command will take a while the first time you run it, but subsequent runs wil
 Travis CI will deploy a new version of your package to PyPI every time you push a tag of any name to any branch. My typical process for making changes is something like this:
 
 1. Made some code changes, and [update the version number](http://semver.org/) in `setup.py`.
-2. Test the changes locally (e.g., `fig build && fig up`). See previous section.
+2. Test the changes locally (e.g., `docker-compose build && docker-compose up`). See previous section.
 3. Commit.
 4. Push your changes, and make sure Travis CI succeeds.
 5. Tag the successful commit with the newly-updated version (e.g., `git tag 1.0.2`).
