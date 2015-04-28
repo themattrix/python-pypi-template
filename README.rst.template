@@ -27,6 +27,14 @@ Example
     # TODO: add example
 
 
+Changelog
+---------
+
+**{{ package_version }}**
+
+- Initial release.
+
+
 .. |Build| image:: https://travis-ci.org/{{ github_user }}/{{ repo_name }}.svg?branch=master
    :target: https://travis-ci.org/{{ github_user }}/{{ repo_name }}
 .. |Coverage| image:: https://img.shields.io/coveralls/{{ github_user }}/{{ repo_name }}.svg
