@@ -9,6 +9,7 @@ Template for quickly creating a new Python project and publishing it to [PyPI](h
 - [Travis CI command-line tools](https://rubygems.org/gems/travis)
 - [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
 - [Git](http://git-scm.com/) and a [GitHub](https://github.com/) account
+- [PyPI](https://pypi.python.org/pypi) account
 
 
 ## Initial Setup
@@ -35,7 +36,7 @@ At this point, your library should be empty, but all set up. Let's test it out!
 
 ## Local Tests
 
-Docker, Compose, and [Tox](https://tox.readthedocs.org/en/latest/) are used to approximate the environment that Travis CI runs when you push. This will allow you to run your code against multiple versions of Python (2.6, 2.7, 3.2, 3.3, 3.4, PyPy, and PyPy3) locally before pushing it or even committing it.
+Docker, Compose, and [Tox](https://tox.readthedocs.org/en/latest/) are used to approximate the environment that Travis CI, Landscape, and Coveralls all run when you push. This will allow you to test your code against multiple versions of Python (2.6, 2.7, 3.2, 3.3, 3.4, PyPy, and PyPy3) locally before pushing it or even committing it.
 
 ```
 $ docker-compose build && docker-compose up
@@ -51,7 +52,7 @@ Travis CI will deploy a new version of your package to PyPI every time you push 
 1. Made some code changes, and [update the version number](http://semver.org/) in `setup.py`.
 2. Test the changes locally (e.g., `docker-compose build && docker-compose up`). See previous section.
 3. Commit.
-4. Push your changes, and make sure Travis CI succeeds.
+4. Push your changes; make sure Travis CI succeeds.
 5. Tag the successful commit with the newly-updated version (e.g., `git tag 1.0.2`).
 6. Push the tag (e.g., `git push origin 1.0.2`).
 
