@@ -13,18 +13,21 @@ Template for quickly creating a new Python project and publishing it to [PyPI](h
 
 ## Initial Setup
 
-1. Fork this repository to your own GitHub account.
-2. Rename your forked repo to something more in line with the spirit of your project.
-3. Enable your repo in:
+1. Create a new, empty GitHub repo for your Python project. Search PyPI to find a name that doesn't exist!
+2. Enable your repo in:
     - [Travis CI](https://travis-ci.org) for building, testing, and publishing to PyPI;
     - [Landscape](https://landscape.io) for code metrics; and
     - [Coveralls](https://coveralls.io) for code coverage.
-4. Clone your repo locally.
-5. [Make sure you have `user.name` and `user.email` set in git](https://help.github.com/articles/setting-your-username-in-git/).
+3. Clone your repo locally.
+4. [Make sure you have `user.name` and `user.email` set in git](https://help.github.com/articles/setting-your-username-in-git/).
+5. Clone this template repo locally and copy everything (except `.git/`) into your new repo.
 6. Edit `populate.ini` and fill out the appropriate info for your project.
 7. Commit.
 8. Run `populate.py` to populate all templated files and filenames. This will delete all files useful only for the template, including itself. If something doesn't work out, you can always revert to commit you made in the previous step.
-9. Add your encrypted PyPI password to `.travis.yml` by running `travis encrypt --add deploy.password`.
+9. Add your encrypted PyPI password to `.travis.yml` by running:
+
+        travis encrypt --add deploy.password
+
 10. Commit.
 
 At this point, your library should be empty, but all set up. Let's test it out!
