@@ -1,14 +1,7 @@
 [tox]
 envlist = py26,py27,py32,py33,py34,pypy,pypy3
-skipsdist = {env:TOXSKIPSDIST:false}
 
-[installonly]
-flake8 = true
-pyflakes = true
-pylint = true
-nosetests = true
-
-[defaultcommands]
+[commands]
 flake8 = flake8 setup.py "{{ package_name }}"
 pyflakes = pyflakes setup.py "{{ package_dir_name }}"
 pylint = pylint --rcfile=.pylintrc "{{ package_dir_name }}"
@@ -21,10 +14,10 @@ deps =
     -rrequirements_static_analysis.txt
     -rrequirements_test.txt
 commands =
-    {[{env:TOXCOMMANDS:defaultcommands}]flake8}
-    {[{env:TOXCOMMANDS:defaultcommands}]pyflakes}
-    {[{env:TOXCOMMANDS:defaultcommands}]pylint}
-    {[{env:TOXCOMMANDS:defaultcommands}]nosetests}
+    {[commands]flake8}
+    {[commands]pyflakes}
+    {[commands]pylint}
+    {[commands]nosetests}
 
 [testenv:py34]
 whitelist_externals = true
@@ -33,10 +26,10 @@ deps =
     -rrequirements_static_analysis.txt
     -rrequirements_test.txt
 commands =
-    {[{env:TOXCOMMANDS:defaultcommands}]flake8}
-    {[{env:TOXCOMMANDS:defaultcommands}]pyflakes}
-    {[{env:TOXCOMMANDS:defaultcommands}]pylint}
-    {[{env:TOXCOMMANDS:defaultcommands}]nosetests}
+    {[commands]flake8}
+    {[commands]pyflakes}
+    {[commands]pylint}
+    {[commands]nosetests}
 
 [testenv]
 whitelist_externals = true
@@ -44,4 +37,4 @@ deps =
     -rrequirements_test_runner.txt
     -rrequirements_test.txt
 commands =
-    {[{env:TOXCOMMANDS:defaultcommands}]nosetests}
+    {[commands]nosetests}

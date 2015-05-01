@@ -1,23 +1,18 @@
 language: python
-python:
-- 2.6
-- 2.7
-- 3.2
-- 3.3
-- 3.4
-- pypy
-- pypy3
+env:
+  - TOXENV=py26
+  - TOXENV=py27
+  - TOXENV=py32
+  - TOXENV=py33
+  - TOXENV=py34
+  - TOXENV=pypy
+  - TOXENV=pypy3
 install:
-- pip install -r requirements_test_runner.txt
-- pip install -r requirements_static_analysis.txt
-- pip install -r requirements_test.txt
-- pip install coveralls
-- python setup.py develop
-before_script:
-- flake8 setup.py "{{ package_dir_name }}"
-- pyflakes setup.py "{{ package_dir_name }}"
-script: nosetests --with-doctest --doctest-options="+NORMALIZE_WHITESPACE" --with-coverage --cover-tests --cover-inclusive --cover-package="{{ package_dir_name }}" "{{ package_dir_name }}"
-after_success: coveralls
+  - pip install tox coveralls
+script:
+  - tox
+after_success:
+  - coveralls
 deploy:
   provider: pypi
   user: {{ github_user }}
