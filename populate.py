@@ -162,7 +162,10 @@ def replace_pystrings(text, key, value):
         text=text, key=key, value=value,
         filter_name='pystring',
         replacement_fn=lambda indent, value: indent + ('\n' + indent).join(
-            map(repr, textwrap.wrap(value, width=70 - len(indent)))))
+            repr(line) for line in textwrap.wrap(
+                value,
+                drop_whitespace=False,
+                width=70 - len(indent))))
 
 
 def replace_pytuples(text, key, value):
@@ -170,7 +173,7 @@ def replace_pytuples(text, key, value):
         text=text, key=key, value=value,
         filter_name='pytuple',
         replacement_fn=lambda indent, value: '\n'.join(
-            map(lambda value: indent + repr(value) + ',', value)))
+            indent + repr(v) + ',' for v in value))
 
     # squash empty tuples
     text = re.sub('[(]\s+[)]', '()', text)

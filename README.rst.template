@@ -12,7 +12,7 @@
 
 Installation:
 
-.. code:: shell
+.. code:: console
 
     $ pip install {{ package_name }}
 
