@@ -21,6 +21,7 @@ except ImportError:
 
 
 this_dir = dirname(abspath(__file__))
+template_dir = join(this_dir, 'template')
 populate_ini = join(this_dir, 'populate.ini')
 
 
@@ -33,13 +34,13 @@ else:
 
 
 def find_templated_files():
-    for root, _, filenames in os.walk(this_dir):  # pylint: disable=W0612
+    for root, _, filenames in os.walk(template_dir):  # pylint: disable=W0612
         for f in fnmatch.filter(filenames, '*.template'):
             yield join(root, f)
 
 
 def find_templated_directories():
-    for root, dirnames, _ in os.walk(this_dir):  # pylint: disable=W0612
+    for root, dirnames, _ in os.walk(template_dir):  # pylint: disable=W0612
         for d in fnmatch.filter(dirnames, '{{ * }}'):
             yield join(root, d)
 
@@ -49,7 +50,7 @@ def git(*args):
 
 
 def read_requirements(requirements_file_basename):
-    with open(join(this_dir, requirements_file_basename)) as f:
+    with open(join(template_dir, requirements_file_basename)) as f:
         content = f.read()
 
     for line in content.splitlines():
@@ -239,6 +240,10 @@ def main():
         git('rm', '-f', populate_ini)
         git('rm', abspath(__file__))
         git('rm', join(this_dir, 'README.md'))
+
+        # Move everything in template/ to the root of the project.
+        for filename in os.listdir(template_dir):
+            git('mv', '-f', join(template_dir, filename), this_dir)
 
         # Stage the rest of the updated files.
         git('add', '-u')
