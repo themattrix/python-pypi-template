@@ -67,3 +67,4 @@ target/
 
 # Vim swap files
 *.swp
+.*.swp

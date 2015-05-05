@@ -2,10 +2,8 @@
 
 set -e -o pipefail
 
-mkdir /project
+cp -rT /app/ /project
 cd /project
-
-find /app/ -maxdepth 1 -mindepth 1 '(' -type d -name "test" -prune ')' -o -exec mv -t . {} +
 
 git init
 git config user.name "Test User"
