@@ -42,8 +42,8 @@ find \( -type d -name ".git" -prune \) -o -ls
 
 travis lint
 
-docker-compose build
-docker-compose up
+docker-compose --verbose build
+docker-compose --verbose up
 
 # No files should have escaped the container during a run.
-[ -n "$(git clean -xnd)" ]
+[ -z "$(git clean -xnd)" ]

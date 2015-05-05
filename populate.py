@@ -246,6 +246,9 @@ def main():
         for filename in os.listdir(template_dir):
             git('mv', '-f', join(template_dir, filename), this_dir)
 
+        # The template dir is unneeded now and should be empty.
+        check_output(('rmdir', template_dir))
+
         # Stage the rest of the updated files.
         git('add', '-u')
 
