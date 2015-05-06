@@ -22,10 +22,17 @@ RUN wget -O /usr/local/bin/docker-compose \
         https://github.com/docker/compose/releases/download/1.2.0/docker-compose-`uname -s`-`uname -m` \
     && chmod +x /usr/local/bin/docker-compose
 
+RUN mkdir /install \
+    && cd /install \
+    && git clone https://github.com/sstephenson/bats.git \
+    && cd bats \
+    && git checkout v0.4.0 \
+    && ./install.sh /usr/local
+
 ADD . /app/
 WORKDIR /app
-RUN chmod +x test/impl/integration/tests.sh test/impl/wrapdocker
+RUN chmod +x test/impl/wrapdocker
 
 VOLUME /var/lib/docker
 
-CMD ["test/impl/wrapdocker", "test/impl/integration/tests.sh"]
+CMD ["test/impl/wrapdocker", "bats", "test/impl/integration/tests.bats"]
