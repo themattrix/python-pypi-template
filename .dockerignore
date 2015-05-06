@@ -9,6 +9,7 @@
 # Docker
 docker-compose.yml
 Dockerfile*
+.docker
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

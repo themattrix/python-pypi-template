@@ -18,4 +18,4 @@ if [[ -n "${OLD_IMAGE}" ]] && [[ "${OLD_IMAGE}" != $(image_id) ]]; then
     docker rmi "${OLD_IMAGE}"
 fi
 
-docker run --rm -v /var/run/docker.sock:/var/run/docker.sock "${IMAGE_NAME}"
+docker run --privileged --rm -v "${PWD}/.docker:/var/lib/docker" "${IMAGE_NAME}"

@@ -24,6 +24,8 @@ RUN wget -O /usr/local/bin/docker-compose \
 
 ADD . /app/
 WORKDIR /app
-RUN chmod +x test/impl/integration/tests.sh
+RUN chmod +x test/impl/integration/tests.sh test/impl/wrapdocker
 
-CMD ["test/impl/integration/tests.sh"]
+VOLUME /var/lib/docker
+
+CMD ["test/impl/wrapdocker", "test/impl/integration/tests.sh"]
