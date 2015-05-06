@@ -1,7 +1,8 @@
 #!/usr/bin/env bats
 
 @test "ensure project created from template" {
-    cp -rT /app/ /project
+    mkdir -p /project
+    cp -r /app/{populate.{ini,py},template} /project/
 
     # Set all files and directories to a consistant, arbitrary date so that the
     # docker ADD command will invalidate the cache on checksum alone.
@@ -34,13 +35,14 @@ ORIGIN-AND-MASTER
 @test "ensure populate.py runs successfully" {
     cd /project
 
-    echo -e "\n[Before]"
-    find \( -type d -name ".git" -prune \) -o -ls
+    function debug {
+        echo -e "\n[${1}]"
+        find \( -type d -name ".git" -prune \) -o -ls
+    }
 
+    debug "Before"
     run ./populate.py
-
-    echo -e "\n[After]"
-    find \( -type d -name ".git" -prune \) -o -ls
+    debug "After"
 
     [ "${status}" -eq 0 ]
 

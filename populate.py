@@ -237,10 +237,8 @@ def main():
         populate_directories(template_values)
 
         # No longer need the template setup files!
-        git('rm', '-rf', 'test')
         git('rm', '-f', populate_ini)
         git('rm', abspath(__file__))
-        git('rm', join(this_dir, 'README.md'))
 
         # Move everything in template/ to the root of the project.
         for filename in os.listdir(template_dir):
