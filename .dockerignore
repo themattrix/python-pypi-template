@@ -8,12 +8,17 @@
 
 # Docker
 docker-compose.yml
-Dockerfile*
 .docker
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*/*/*/__pycache__/
 *.py[cod]
+*/*.py[cod]
+*/*/*.py[cod]
+*/*/*/*.py[cod]
 
 # C extensions
 *.so
@@ -74,7 +79,12 @@ target/
 
 # Python mode for VIM
 .ropeproject
+*/.ropeproject
+*/*/.ropeproject
+*/*/*/.ropeproject
 
 # Vim swap files
 *.swp
-.*.swp
+*/*.swp
+*/*/*.swp
+*/*/*/*.swp

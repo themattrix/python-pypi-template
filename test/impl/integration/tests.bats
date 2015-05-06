@@ -1,18 +1,12 @@
 #!/usr/bin/env bats
 
 @test "ensure project created from template" {
-    # Delete any pesky swap files that made it in. These should be excluded by
-    # the .dockerignore file, but it doesn't seem to be working.
-    find /app/ -type f \( -name "*.swp" -o -name ".*.swp" \) -exec rm -f {} +
-
     cp -rT /app/ /project
 
     # Set all files and directories to a consistant, arbitrary date so that the
     # docker ADD command will invalidate the cache on checksum alone.
     find /project -exec touch -t 200001010000.00 {} +
-}
 
-@test "ensure git initialized for project" {
     cd /project
 
     git init
@@ -27,10 +21,6 @@
     remote = origin
     merge = refs/heads/master
 ORIGIN-AND-MASTER
-}
-
-@test "ensure template populated" {
-    cd /project
 
     sed -e 's/^package_name=/&test-package/' \
         -e 's/^package_version=/&1.0.0/' \
@@ -44,11 +34,17 @@ ORIGIN-AND-MASTER
 @test "ensure populate.py runs successfully" {
     cd /project
 
-    ./populate.py
-    git commit -m "Post-populated template."
-
-    # List files for manual inspection if necessary.
+    echo -e "\n[Before]"
     find \( -type d -name ".git" -prune \) -o -ls
+
+    run ./populate.py
+
+    echo -e "\n[After]"
+    find \( -type d -name ".git" -prune \) -o -ls
+
+    [ "${status}" -eq 0 ]
+
+    git commit -m "Post-populated template."
 }
 
 @test "ensure .travis.yml looks valid" {
