@@ -7,7 +7,7 @@ import sys
 import textwrap
 from datetime import date
 from string import capwords
-from subprocess import check_output
+from subprocess import check_call, check_output
 from os.path import abspath, dirname, join
 
 try:
@@ -245,7 +245,7 @@ def main():
             git('mv', '-f', join(template_dir, filename), this_dir)
 
         # The template dir is unneeded now and should be empty.
-        check_output(('rmdir', template_dir))
+        check_call(('rmdir', template_dir))
 
         # Stage the rest of the updated files.
         git('add', '-u')

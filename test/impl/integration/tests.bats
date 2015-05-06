@@ -42,9 +42,24 @@ ORIGIN-AND-MASTER
 
     debug "Before"
     run ./populate.py
+    echo "${output}"
     debug "After"
 
     [ "${status}" -eq 0 ]
+
+    [ "${output}" == "$(
+        echo "Using the following template values:"
+        echo "    package_name: 'test-package'"
+        echo "    install_requires: ()"
+        echo "    package_version: '1.0.0'"
+        echo "    author_name: 'Test User'"
+        echo "    tests_require: ()"
+        echo "    package_dir_name: 'test_package'"
+        echo "    author_email: 'test.email@localhost'"
+        echo "    github_user: 'test-github-user'"
+        echo "    copyright_years: '$(date +%Y)'"
+        echo "    short_description: 'This is my test project!'"
+        echo "    repo_name: 'test-github-project'")" ]
 
     git commit -m "Post-populated template."
 }
