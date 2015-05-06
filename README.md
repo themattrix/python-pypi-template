@@ -21,7 +21,7 @@ Template for quickly creating a new Python project and publishing it to [PyPI](h
     - [Coveralls](https://coveralls.io) for code coverage.
 3. Clone your repo locally.
 4. [Make sure you have `user.name` and `user.email` set in git](https://help.github.com/articles/setting-your-username-in-git/).
-5. Clone this template repo locally and copy everything (except `.git/`) into your new repo.
+5. Clone this template repo locally and copy `populate.ini`, `populate.py`, and `template/` into your new repo.
 6. Edit `populate.ini` and fill out the appropriate info for your project.
 7. Commit.
 8. Run `populate.py` to populate all templated files and filenames. This will delete all files useful only for the template, including itself. If something doesn't work out, you can always revert to commit you made in the previous step.
