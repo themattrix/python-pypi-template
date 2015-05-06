@@ -63,7 +63,10 @@ ORIGIN-AND-MASTER
 
 @test "ensure tox environments run tests successfully" {
     cd /project
-    docker-compose up
+    run docker-compose up
+
+    # Expect one set of nosetest to be run per Python version.
+    [ "$(grep "Ran 0 tests" <<< "${output}" | wc -l)" -eq 7 ]
 }
 
 @test "ensure no files escaped tox container" {
