@@ -10,7 +10,7 @@ function image_id {
 }
 
 function clean {
-    if [[ -n "${OLD_IMAGE}" ]] && [[ "${OLD_IMAGE}" != $(image_id) ]]; then
+    if [[ -n "${OLD_IMAGE}" && "${OLD_IMAGE}" != $(image_id) ]]; then
         docker rmi "${OLD_IMAGE}"
     fi
 }
