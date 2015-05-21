@@ -79,7 +79,10 @@ ORIGIN-AND-MASTER
     run docker-compose up
 
     # Expect one set of nosetest to be run per Python version.
-    [ "$(grep "Ran 0 tests" <<< "${output}" | wc -l)" -eq 7 ]
+    [ "$(grep -F "Ran 0 tests" <<< "${output}" | wc -l)" -eq 7 ]
+
+    # No warnings or errors should appear in the output.
+    ! grep -Ei "(Warning|Error):" <<< "${output}"
 }
 
 @test "ensure no files escaped tox container" {

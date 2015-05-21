@@ -3,7 +3,6 @@
 set -e -o pipefail
 
 readonly PACKAGE_DIR="{{ package_dir_name }}"
-readonly PACKAGE_NAME="{{ package_name }}"
 
 function each_iname {
     local iname=${1}; shift
@@ -28,7 +27,7 @@ function unit_test {
         --with-coverage \
         --cover-tests \
         --cover-inclusive \
-        --cover-package="${PACKAGE_NAME}" \
+        --cover-package="${PACKAGE_DIR}" \
         "${PACKAGE_DIR}"
 }
 
