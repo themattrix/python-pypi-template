@@ -1,14 +1,9 @@
 #!/usr/bin/env bats
 
 @test "ensure project created from template" {
-    mkdir -p /project
-    cp -r /app/{populate.{ini,py},template} /project/
-
     # Set all files and directories to a consistant, arbitrary date so that the
     # docker ADD command will invalidate the cache on checksum alone.
-    find /project -exec touch -t 200001010000.00 {} +
-
-    cd /project
+    find . -exec touch -t 200001010000.00 {} +
 
     git init
     git config user.name "Test User"
@@ -33,8 +28,6 @@ ORIGIN-AND-MASTER
 }
 
 @test "ensure populate.py runs successfully" {
-    cd /project
-
     function debug {
         echo -e "\n[${1}]"
         find \( -type d -name ".git" -prune \) -o -ls
@@ -65,18 +58,46 @@ ORIGIN-AND-MASTER
 }
 
 @test "ensure .travis.yml looks valid" {
-    cd /project
     travis lint
 }
 
+@test "ensure tox base image up-to-date" {
+    docker pull themattrix/tox:latest
+}
+
 @test "ensure tox environments build correctly" {
-    cd /project
+    docker-compose rm -f
     docker-compose build
 }
 
+@test "ensure pwd is visible to docker daemon" {
+    # The docker daemon we're talking to is the same one in which we're
+    # running. This allows us to create "sibling" containers, but it also
+    # creates a problem for volumes. When we tell the daemon to mount the
+    # working directory, it will mount an empty directory because it doesn't
+    # have visibility into *this* container.
+    #
+    # Solution: We can employ a little trickery to find where the working
+    # directory is actually stored on disk (as seen by the daemon). This
+    # relies on the fact that the working directory happens to be a mountpoint
+    # and that we can inspect mountpoints "docker inspect".
+
+    find_pwd_on_disk() {
+        docker inspect \
+            -f '{{ range .Mounts }}{{ if eq .Destination "'"${PWD}"'" }}{{ .Source }}{{ end }}{{ end }}' \
+            test_integration_tests_1
+    }
+
+    sed -e "s#.:/src:ro#$(find_pwd_on_disk):/src:ro#" \
+        -i "docker-compose.yml"
+
+    # Expect the mount point to be updated.
+    grep "/var/lib/docker" "docker-compose.yml"
+}
+
 @test "ensure tox environments run tests successfully" {
-    cd /project
     run docker-compose up
+    echo "${output}"
 
     # Expect one set of nosetest to be run per Python version.
     [ "$(grep -F "Ran 0 tests" <<< "${output}" | wc -l)" -eq 7 ]
@@ -86,6 +107,5 @@ ORIGIN-AND-MASTER
 }
 
 @test "ensure no files escaped tox container" {
-    cd /project
     [ -z "$(git clean -xnd)" ]
 }

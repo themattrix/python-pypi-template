@@ -41,13 +41,13 @@ Changelog
    :target: https://coveralls.io/r/{{ github_user }}/{{ repo_name }}
 .. |Health| image:: https://landscape.io/github/{{ github_user }}/{{ repo_name }}/master/landscape.svg
    :target: https://landscape.io/github/{{ github_user }}/{{ repo_name }}/master
-.. |Version| image:: https://pypip.in/version/{{ package_dir_name }}/badge.svg?text=version
+.. |Version| image:: https://img.shields.io/pypi/v/{{ package_name }}.svg
    :target: https://pypi.python.org/pypi/{{ package_name }}
-.. |Downloads| image:: https://pypip.in/download/{{ package_dir_name }}/badge.svg
+.. |Downloads| image:: https://img.shields.io/pypi/dm/{{ package_name }}.svg
    :target: https://pypi.python.org/pypi/{{ package_name }}
-.. |Compatibility| image:: https://pypip.in/py_versions/{{ package_dir_name }}/badge.svg
+.. |Compatibility| image:: https://img.shields.io/pypi/pyversions/{{ package_name }}.svg
    :target: https://pypi.python.org/pypi/{{ package_name }}
-.. |Implementations| image:: https://pypip.in/implementation/{{ package_dir_name }}/badge.svg
+.. |Implementations| image:: https://img.shields.io/pypi/implementation/{{ package_name }}.svg
    :target: https://pypi.python.org/pypi/{{ package_name }}
-.. |Format| image:: https://pypip.in/format/{{ package_dir_name }}/badge.svg
+.. |Format| image:: https://img.shields.io/pypi/format/{{ package_name }}.svg
    :target: https://pypi.python.org/pypi/{{ package_name }}

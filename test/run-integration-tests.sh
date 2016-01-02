@@ -1,45 +1,24 @@
 #!/bin/bash
-# When docker-compose supports the -f option, we can delete this whole file!
 
 set -e -o pipefail
 
-cd "${BASH_SOURCE[0]%/*}/.."
-
-function image_id {
-    docker inspect -f '{{ .Id }}' "${IMAGE_NAME}"
-}
-
-function clean {
-    if [[ -n "${OLD_IMAGE}" && "${OLD_IMAGE}" != $(image_id) ]]; then
-        docker rmi "${OLD_IMAGE}"
-    fi
-}
-
-function run {
+output_on_failure() {
+    local message=${1}; shift
     local output
     local status
-    local title=${1}
-    shift
-
+    printf '%s' "${message}"
     set +e
-    echo -n "# ${title}..."
-    output=$("$@" 2>&1)
+    output=$("${@}" 2>&1)
     status=$?
     set -e
-
-    if [ ${status} -eq 0 ]; then
-        echo "ok"
-    else
-        echo "fail"
-        echo "${output}"
-        exit "${status}"
-    fi
+    ! ((status)) || { printf 'FAIL\n\n%s\n' "${output}"; ! ((status)); }
+    printf 'done\n'
 }
 
-readonly IMAGE_NAME="pypi-template-int-tests"
-readonly OLD_IMAGE=$(image_id || true)
+cd "$(dirname ${BASH_SOURCE[0]})"
 
-run "Building" docker build -t "${IMAGE_NAME}" -f "test/impl/integration/Dockerfile" .
-run "Cleaning" clean
-
-docker run --privileged --rm -v "${PWD}/.docker:/var/lib/docker" "${IMAGE_NAME}"
+output_on_failure "Cleaning..." \
+    docker-compose rm -f
+output_on_failure "Building..." \
+    docker-compose build
+docker-compose up
