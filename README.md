@@ -17,7 +17,7 @@ Template for quickly creating a new Python project and publishing it to [PyPI](h
 1. Create a new, empty GitHub repo for your Python project. Search PyPI to find a name that doesn't exist!
 2. Enable your repo in:
     - [Travis CI](https://travis-ci.org) for building, testing, and publishing to PyPI;
-    - [Landscape](https://landscape.io) for code metrics; and
+    - [Code Climate](https://codeclimate.com) for code metrics; and
     - [Coveralls](https://coveralls.io) for code coverage.
 3. Clone your repo locally.
 4. [Make sure you have `user.name` and `user.email` set in git](https://help.github.com/articles/setting-your-username-in-git/).
@@ -36,7 +36,7 @@ At this point, your library should be empty, but all set up. Let's test it out!
 
 ## Local Tests
 
-Docker, Compose, and [Tox](https://tox.readthedocs.org/en/latest/) are used to approximate the environment that Travis CI, Landscape, and Coveralls all run when you push. This will allow you to test your code against multiple versions of Python (2.6, 2.7, 3.3, 3.4, 3.5, PyPy, and PyPy3) locally before pushing it or even committing it.
+Docker, Compose, and [Tox](https://tox.readthedocs.org/en/latest/) are used to approximate the environment that Travis CI, Code Climate, and Coveralls all run when you push. This will allow you to test your code against multiple versions of Python (2.6, 2.7, 3.3, 3.4, 3.5, PyPy, and PyPy3) locally before pushing it or even committing it.
 
 To run everything (this will take a while the first time you run it, but subsequent runs will be quick):
 

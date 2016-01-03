@@ -39,8 +39,8 @@ Changelog
    :target: https://travis-ci.org/{{ github_user }}/{{ repo_name }}
 .. |Coverage| image:: https://img.shields.io/coveralls/{{ github_user }}/{{ repo_name }}.svg
    :target: https://coveralls.io/r/{{ github_user }}/{{ repo_name }}
-.. |Health| image:: https://landscape.io/github/{{ github_user }}/{{ repo_name }}/master/landscape.svg
-   :target: https://landscape.io/github/{{ github_user }}/{{ repo_name }}/master
+.. |Health| image:: https://codeclimate.com/github/{{ github_user }}/{{ repo_name }}/badges/gpa.svg
+   :target: https://codeclimate.com/github/{{ github_user }}/{{ repo_name }}
 .. |Version| image:: https://img.shields.io/pypi/v/{{ package_name }}.svg
    :target: https://pypi.python.org/pypi/{{ package_name }}
 .. |Downloads| image:: https://img.shields.io/pypi/dm/{{ package_name }}.svg

@@ -3,7 +3,7 @@
 .gitignore
 
 # CI
-.landscape.yml
+.codeclimate.yml
 .travis.yml
 
 # Docker
