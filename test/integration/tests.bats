@@ -67,7 +67,13 @@ ORIGIN-AND-MASTER
 
 @test "ensure tox environments build correctly" {
     docker-compose rm -f
-    docker-compose build
+    run docker-compose build
+    echo "${output}"
+
+    [ "${status}" -eq 0 ]
+
+    # No warnings or errors should appear in the output.
+    ! grep -Ei "(Warning|Error):" <<< "${output}"
 }
 
 @test "ensure pwd is visible to docker daemon" {
