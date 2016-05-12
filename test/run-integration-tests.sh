@@ -17,8 +17,6 @@ output_on_failure() {
 
 cd "$(dirname ${BASH_SOURCE[0]})"
 
-output_on_failure "Cleaning..." \
-    docker-compose rm -f
-output_on_failure "Building..." \
-    docker-compose build
-docker-compose up
+output_on_failure "Cleaning..." docker-compose rm -f
+output_on_failure "Building..." docker-compose build
+docker-compose up  # must use "up" instead of "run" for introspection by the tests

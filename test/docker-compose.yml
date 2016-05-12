@@ -3,5 +3,4 @@ integration_tests:
   build: integration
   volumes:
     - "..:/src:ro"
-    - "/usr/local/bin/docker:/usr/local/bin/docker"
     - "/var/run/docker.sock:/var/run/docker.sock"

@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e -o pipefail
+set -o errexit -o pipefail
 shopt -s dotglob
 
 # Copy our template files from /src/ to the pwd.
@@ -8,4 +8,4 @@ cp -r /src/{populate.{ini,py},template} ./
 chmod +x ./populate.py
 
 # Run tests!
-bats /src/test/integration/*.bats
+exec bats /src/test/integration/*.bats
