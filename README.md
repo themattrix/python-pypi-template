@@ -47,7 +47,7 @@ $ docker-compose build && docker-compose up
 To run against a single environment (e.g., Python 3.4):
 
 ```
-$ docker-compose build && docker-compose run -e TOXENV=py34 tox
+$ docker-compose build && docker-compose run tox tox -e py34
 ```
 
 

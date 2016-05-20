@@ -4,5 +4,4 @@ pygments==2.0.2
 
 # Code analysis
 flake8
-pyflakes
 pylint
