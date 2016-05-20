@@ -70,10 +70,10 @@ ORIGIN-AND-MASTER
     run docker-compose build
     echo "${output}"
 
-    [ "${status}" -eq 0 ]
+    [[ "${status}" -eq 0 ]]
 
-    # No warnings or errors should appear in the output.
-    ! grep -Ei "(Warning|Error):" <<< "${output}"
+    # No errors should appear in the output.
+    ! grep -Ei "Error:" <<< "${output}"
 }
 
 @test "ensure pwd is visible to docker daemon" {
@@ -105,10 +105,17 @@ ORIGIN-AND-MASTER
     run docker-compose up
     echo "${output}"
 
-    # Expect one set of nosetest to be run per Python version.
+    # Expect one set of nosetests to be run per Python version.
     [[ "$(grep -F "Ran 0 tests" <<< "${output}" | wc -l)" -eq 7 ]]
 
-    # No warnings or errors should appear in the output.
+    # Python 2.x and 3.x should run static analysis.
+    [[ "$(grep ' python tests.py --static-analysis$' <<< "${output}" | wc -l)" -eq 2 ]]
+    [[ "$(grep ' running check$' <<< "${output}" | wc -l)" -eq 2 ]]
+
+    # Other runs should not run static analysis
+    [[ "$(grep ' python tests.py$' <<< "${output}" | wc -l)" -eq 5 ]]
+
+    # No errors should appear in the output.
     ! grep -Ei "Error:" <<< "${output}"
 }
 
