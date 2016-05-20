@@ -66,7 +66,7 @@ ORIGIN-AND-MASTER
 }
 
 @test "ensure tox environments build correctly" {
-    docker-compose rm -f
+    docker-compose rm -f --all
     run docker-compose build
     echo "${output}"
 
