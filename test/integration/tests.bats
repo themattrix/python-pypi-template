@@ -106,14 +106,14 @@ ORIGIN-AND-MASTER
     echo "${output}"
 
     # Expect one set of nosetests to be run per Python version.
-    [[ "$(grep -F "Ran 0 tests" <<< "${output}" | wc -l)" -eq 7 ]]
+    [[ "$(grep -F "Ran 0 tests" <<< "${output}" | wc -l)" -eq 8 ]]
 
     # Python 2.x and 3.x should run static analysis.
     [[ "$(grep ' python tests.py --static-analysis$' <<< "${output}" | wc -l)" -eq 2 ]]
     [[ "$(grep ' running check$' <<< "${output}" | wc -l)" -eq 2 ]]
 
     # Other runs should not run static analysis
-    [[ "$(grep ' python tests.py$' <<< "${output}" | wc -l)" -eq 5 ]]
+    [[ "$(grep ' python tests.py$' <<< "${output}" | wc -l)" -eq 6 ]]
 
     # No errors should appear in the output.
     ! grep -Ei "Error:" <<< "${output}"
